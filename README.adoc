@@ -1,0 +1,37 @@
+= Asciidoc Commit Hooks
+
+These hooks are used to verify that location of code snippets sourced by Asciidoc in different repositories are
+have not moved during commit.
+
+This ensures that documentation stays accurate. Users is responsible to update documentation if he wants to push such commit upstream.
+
+== Source Snippet activation
+
+Git hooks are looking for position of following markers in modified files:
+
+* +@asciidoc-snippet-start+
+* +@asciidoc-snippet-end+
+
+Usage is following:
+
+[source,java]
+----
+// @asciidoc-snippet-start
+public void myDocumentedMethod() {
+    // do some awesome stuff here
+}
+// @asciidoc-snippet-end
+----
+
+or
+
+[source,xml]
+----
+<my-xml-doc>
+    <!-- @asciidoc-snippet-start -->
+    <my-documented-configuration>
+        <do-staff awesome="true" />
+    </my-documented-configuration>
+    <!-- @asciidoc-snippet-end -->
+</my-xml-doc>
+----
