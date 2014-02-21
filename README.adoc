@@ -5,7 +5,7 @@ have not moved during commit.
 
 This ensures that documentation stays accurate. Users is responsible to update documentation if he wants to push such commit upstream.
 
-== Source Snippet activation
+== Source Snippet activation 
 
 Git hooks are looking for position of following markers in modified files:
 
