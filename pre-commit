@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# This script is looking for Asciidoc markers in files modified in current commit
+# It compares location of these markers with content of the file in previous commit
+# and echoes a warning if location was changed.
+
+MARKER='@asciidoc-snippet-'
+
+# check whether there is a previous commit
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+    last_commit=`git rev-parse HEAD`
+else
+    echo "Ignoring Asciidoc snippet verification, unable to find last commit SHA"
+    exit 0         
+fi
+
+# note, this scripts ignores changes you have in stash
+# get names of all changed files
+files=`git diff --cached --name-only --diff-filter=AMD`
+
+# get revisions of the file
+for f in $files; do    
+
+    # get lines using file content in previous commit
+    last_lines=`git show $last_commit:$f 2>/dev/null | grep -n $MARKER | awk 'BEGIN { FS=":" } {print $1}'`
+    # get lines using file content on filesystem, might be null
+    current_lines=`cat $f 2>/dev/null | grep -n $MARKER | awk 'BEGIN { FS=":" } {print $1}'`
+
+    # check only if in previous commit the file existed
+    if [ "x$last_lines" != "x" ]; then
+        if [ "$last_lines" != "$current_lines" ]; then
+           echo "Detected Asciidoc Snippet movement in $f, please make sure to update documenation"
+        fi   
+    fi    
+done
