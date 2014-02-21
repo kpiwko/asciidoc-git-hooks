@@ -12,7 +12,7 @@ Git hooks are looking for position of following markers in modified files:
 * +@asciidoc-snippet-start+
 * +@asciidoc-snippet-end+
 
-Usage is following:
+Usage is following (Java)
 
 [source,java]
 ----
@@ -23,7 +23,7 @@ public void myDocumentedMethod() {
 // @asciidoc-snippet-end
 ----
 
-or
+or in XML
 
 [source,xml]
 ----
