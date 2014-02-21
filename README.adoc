@@ -5,6 +5,19 @@ have not moved during commit.
 
 This ensures that documentation stays accurate. Users is responsible to update documentation if he wants to push such commit upstream.
 
+== Installation
+
+Put +pre-commit+ script into your local repository into  +.git/hooks/pre-commit+ location. 
+Make sure that script is executable.
+
+== Prerequisites
+
+* sh
+* git
+* grep
+* awk
+* cat
+
 == Source Snippet activation 
 
 Git hooks are looking for position of following markers in modified files:
